@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:controls="controls.*"
+		  width="620" height="490" fontFamily="微软雅黑" fontSize="12"
+		  creationComplete="creationCompleteHandler(event)">
+	
+	<fx:Script source="packaged.as"/>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Label x="15" y="17" color="#820000" fontSize="14" text="选择项目："/>
+	<controls:GroupBox x="10" y="60" width="350" height="125" title="路径设置">
+		<s:Label x="15" y="22" text="打包目录："/>
+		<s:Label x="15" y="57" text="程序模块："/>
+		<s:Label x="15" y="92" text="　资源库："/>
+		<s:TextInput id="packagedPathIT" x="80" y="15" width="195" height="25"/>
+		<s:TextInput id="sourcePathIT" x="80" y="50" width="195" height="25"/>
+		<s:TextInput id="resPathIT" x="80" y="85" width="95" height="25"/>
+		<s:TextInput id="resVersionIT" x="180" y="85" width="95" height="25"/>
+		<s:Button id="packagedPathBtn" x="285" y="15" width="50" height="25" label="查看"
+				  click="packagedPathBtn_clickHandler(event)"/>
+		<s:Button id="sourcePathBtn" x="285" y="50" width="50" height="25" label="浏览"
+				  click="sourcePathBtn_clickHandler(event)"/>
+		<s:Button id="resBtn" x="285" y="85" width="50" height="25" label="浏览"
+				  click="resBtn_clickHandler(event)"/>
+	</controls:GroupBox>
+	<s:DropDownList id="projectDDL" x="85" y="10" width="140" height="25"></s:DropDownList>
+	<controls:GroupBox x="370" y="20" width="240" height="70" title="打包进度">
+		<mx:ProgressBar id="progressPB" x="15" y="21" width="210" label="准备中" labelPlacement="bottom"/>
+	</controls:GroupBox>
+	<controls:GroupBox x="10" y="205" width="350" height="90" title="自动发布">
+		<s:Label x="15" y="22" text="发布路径："/>
+		<s:Label x="15" y="57" text="　发布人："/>
+		<s:TextInput id="releasePathIT" x="80" y="15" width="255" height="25"/>
+		<s:TextInput id="publisherIT" x="80" y="50" width="120" height="25"/>
+		<s:CheckBox id="openReleaseCB" x="290" y="54" label="开启" selected="true"/>
+	</controls:GroupBox>
+	<controls:GroupBox x="10" y="315" width="350" height="90" title="发送通知">
+		<s:Label x="15" y="22" text="接收主机："/>
+		<s:Label x="15" y="57" text="附带消息："/>
+		<s:TextInput id="noticeMsgIT" x="80" y="50" width="255" height="25"/>
+		<s:CheckBox id="openNoticeCB" x="290" y="19" label="开启" selected="true"/>
+		<s:DropDownList id="noticeServerDDL" x="80" y="15" width="150" height="25"></s:DropDownList>
+	</controls:GroupBox>
+	<controls:GroupBox x="10" y="425" width="350" height="55" title="编辑版本号、打包">
+		<s:Label x="10" y="22" text="打包人(英文)："/>
+		<s:TextInput id="authorIT" x="90" y="15" width="80" height="25"/>
+		<s:Button id="editVersionBtn" x="180" y="15" width="80" height="25" label="编辑版本号"/>
+		<s:Button id="packagedBtn" x="275" y="15" width="60" height="25" label="打包" color="#820000"
+				  fontSize="14"/>
+	</controls:GroupBox>
+	<controls:GroupBox x="370" y="110" width="240" height="283" title="执行记录">
+	</controls:GroupBox>
+</s:Module>

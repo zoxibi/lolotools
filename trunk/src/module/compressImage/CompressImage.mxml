@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:controls="controls.*"
+		  width="620" height="490" creationComplete="creationCompleteHandler(event)"
+		  fontFamily="微软雅黑" fontSize="12">
+	
+	<fx:Script source="compressImage.as"/>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<controls:GroupBox x="55" y="30" width="510" height="150" title="参数设置">
+		<s:TextInput id="fileText" x="115" y="35" width="200" height="25" editable="false"/>
+		<s:Button id="fileBtn" x="325" y="35" width="70" height="25" label="单张图片"
+				  click="fileBtn_clickHandler(event)"/>
+		<s:Button id="folderBtn" x="405" y="35" width="70" height="25" label="文件夹"
+				  click="folderBtn_clickHandler(event)"/>
+		<s:Label x="40" y="42" fontSize="14" text="目标类型："/>
+		<s:Label x="40" y="97" fontSize="14" text="输出品质："/>
+		<s:HSlider id="qualityHS" x="115" y="98" change="qualityHS_changeHandler(event)" maximum="95"
+				   minimum="50" value="80"/>
+		<s:TextInput id="qualityText" x="230" y="90" width="50" height="25" focusOut="qualityText_focusOutHandler(event)"
+					 change="qualityText_changeHandler(event)" maxChars="2" restrict="0-9" text="80"/>
+	</controls:GroupBox>
+	<controls:GroupBox x="55" y="215" width="510" height="250" title="压缩详情">
+		<mx:ProgressBar id="progressBar" x="120" y="33" width="270" height="25" label="压缩进度 0%"
+						fontWeight="normal" indeterminate="false" labelPlacement="center"
+						maximum="100" minimum="0" mode="manual"/>
+		<s:Button id="startBtn" x="30" y="30" width="80" height="30" label="开始压缩"
+				  click="startBtn_clickHandler(event)" color="#960000" enabled="false" fontSize="14"/>
+		<s:Button id="saveBtn" x="400" y="30" width="80" height="30" label="储存本地"
+				  click="saveBtn_clickHandler(event)" color="#000000" enabled="false" fontSize="14"/>
+		<s:TextArea id="logText" x="30" y="70" width="450" height="150" editable="false"/>
+	</controls:GroupBox>
+</s:Module>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--打包工具中的项目列表-->
+<config>
+	<project name="傲视天地" />
+	<project name="征战四方" />
+	<project name="名将传说" />
+	<project name="攻城掠地" />
+	<project name="南斗北斗" />
+</config>
