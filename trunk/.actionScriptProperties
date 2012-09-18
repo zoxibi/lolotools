@@ -22,6 +22,7 @@
     <module application="src/LoloTools.mxml" destPath="module/packaged/Packaged.swf" optimize="true" sourcePath="src/module/packaged/Packaged.mxml"/>
     <module application="src/LoloTools.mxml" destPath="module/compressImage/CompressImage.swf" optimize="true" sourcePath="src/module/compressImage/CompressImage.mxml"/>
     <module application="src/LoloTools.mxml" destPath="module/dataView/DataView.swf" optimize="true" sourcePath="src/module/dataView/DataView.mxml"/>
+    <module application="src/LoloTools.mxml" destPath="module/network/Network.swf" optimize="true" sourcePath="src/module/network/Network.mxml"/>
   </modules>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>

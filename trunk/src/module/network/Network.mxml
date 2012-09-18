@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:controls="controls.*"
+		  width="780" height="580" creationComplete="creationCompleteHandler(event)"
+		  fontFamily="微软雅黑" fontSize="12">
+	
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script source="network.as" />
+	
+	<controls:GroupBox x="0" y="10" width="380" height="240" title="PING测试">
+		<s:Label x="10" y="23" text="地址："/>
+		<s:TextInput id="pingHostText" x="50" y="15" width="250" height="25" text="www.baidu.com"/>
+		<s:Button id="pingBtn" x="310" y="15" width="60" height="25" label="开始"
+				  click="pingBtn_clickHandler(event)"/>
+		<s:TextArea id="pingOutputText" x="10" y="50" width="360" height="180" editable="false"/>
+	</controls:GroupBox>
+	<controls:GroupBox x="400" y="10" width="380" height="240" title="加载测试">
+		<mx:ProgressBar id="downloadPB" x="15" y="195" width="350" height="25" label="下载进度"
+						labelPlacement="center"/>
+		<s:Label x="15" y="78" text="数据包地址："/>
+		<s:TextInput id="testDataUrlText" x="90" y="70" width="205" height="25"/>
+		<s:Button id="downloadBtn" x="305" y="70" width="60" height="25" label="开始"
+				  click="downloadBtn_clickHandler(event)"/>
+		<s:Button id="createDataBtn" x="185" y="20" width="110" height="25" label="生成测试数据包"
+				  click="createDataBtn_clickHandler(event)" color="#5F0000"/>
+		<s:Label id="currentSpeedText" x="15" y="160" text="当前速度："/>
+		<s:Label id="averageSpeedText" x="15" y="125" text="平均速度："/>
+		<s:Label id="targetDataSizeText" x="190" y="160" text="数据大小："/>
+		<s:Label x="15" y="28" text="数据包大小："/>
+		<s:TextInput id="dataSizeText" x="90" y="20" width="45" height="25" text="30"/>
+		<s:Label x="140" y="28" text="MByte"/>
+	</controls:GroupBox>
+</s:Module>
