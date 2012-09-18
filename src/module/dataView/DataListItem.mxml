@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:MXTreeItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  dataChange="mxtreeitemrenderer2_dataChangeHandler(event)"
+					  >
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public static var valueFieldX:int = 200;
+
+			protected function mxtreeitemrenderer2_dataChangeHandler(event:FlexEvent):void
+			{
+				var x:int = labelField.x + labelField.width + 30;
+				if(x > valueFieldX) valueFieldX = x;
+				valueField.text = "|　";
+				if(this.data) {
+					valueField.text += this.data.@value;
+				}
+			}
+
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="normal" />            
+		<s:State name="hovered" />
+		<s:State name="selected" />
+	</s:states>
+	<s:HGroup left="0" right="0" top="0" bottom="0" verticalAlign="middle">
+		<s:Rect id="indentationSpacer" width="{treeListData.indent}" percentHeight="100" alpha="0">
+			<s:fill>
+				<s:SolidColor color="0xFFFFFF" />
+			</s:fill>
+		</s:Rect>
+		<s:Group id="disclosureGroup">
+			<s:BitmapImage source="{treeListData.disclosureIcon}" visible="{treeListData.hasChildren}" />
+		</s:Group>
+		<s:BitmapImage source="{treeListData.icon}" />
+		<s:Label id="labelField" text="{treeListData.label}" paddingTop="2"/>
+	</s:HGroup>
+	<s:Label id="valueField" x="{valueFieldX}" paddingTop="2" color="#666666"/>
+</s:MXTreeItemRenderer>

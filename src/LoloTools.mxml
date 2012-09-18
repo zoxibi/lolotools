@@ -3,25 +3,27 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   showStatusBar="false"
-					   width="620" height="540" fontFamily="微软雅黑" fontSize="12" xmlns:packaged="module.packaged.*">
+					   width="800" height="650" fontFamily="微软雅黑" fontSize="12" xmlns:packaged="module.packaged.*">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<s:TabBar x="10" y="10" width="600" height="35" dataProvider="{conentVS}" fontSize="14"/>
-	<mx:ViewStack id="conentVS" x="0" y="50" width="620" height="490">
+	<s:TabBar x="10" y="10" width="780" height="35" dataProvider="{conentVS}" fontSize="14"/>
+	<mx:ViewStack id="conentVS" x="10" y="60" width="780" height="580">
 		<s:ModuleLoader id="packaged" url="module/packaged/Packaged.swf" width="100%" height="100%" label="程序打包" />
 		<s:ModuleLoader width="100%" height="100%" label="界面生成">
 		</s:ModuleLoader>
-		<s:ModuleLoader width="100%" height="100%" label="数据查看">
-		</s:ModuleLoader>
 		<s:ModuleLoader id="compressImage" url="module/compressImage/CompressImage.swf" width="100%" height="100%" label="压缩图片">
+		</s:ModuleLoader>
+		<s:ModuleLoader id="dataView" url="module/dataView/DataView.swf" width="100%" height="100%" label="数据查看">
 		</s:ModuleLoader>
 		<s:ModuleLoader width="100%" height="100%" label="图片切割">
 		</s:ModuleLoader>
 		<s:ModuleLoader width="100%" height="100%" label="地图编辑">
 		</s:ModuleLoader>
+		<s:ModuleLoader id="network" url="module/network/Network.swf" width="100%" height="100%" label="网络工具">
+		</s:ModuleLoader>
 		<s:ModuleLoader width="100%" height="100%" label="关于">
 		</s:ModuleLoader>
 	</mx:ViewStack>
-	<mx:HRule x="0" y="44" width="620" strokeColor="#000000"/>
+	<mx:HRule x="0" y="44" width="800" strokeColor="#000000"/>
 </s:WindowedApplication>

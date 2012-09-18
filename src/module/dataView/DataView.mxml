@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300">
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  width="780" height="580" creationComplete="creationCompleteHandler(event)"
+		  fontFamily="微软雅黑" fontSize="12">
+	
+	<fx:Script source="dataView.as"/>
+	
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
+	
+	<mx:Tree id="dataListTree" x="0" y="10" width="490" height="570"
+			 change="dataListTree_changeHandler(event)" itemRenderer="module.dataView.DataListItem"></mx:Tree>
+	<s:RadioButton x="500" y="11" label="XML文件" id="xmlRB"/>
+	<s:RadioButton x="576" y="11" label="JSON文件" selected="true" id="jsonRB"/>
+	<s:CheckBox x="662" y="11" label="数据已压缩" id="compressCB" color="#B80A0A"/>
+	<s:TextInput id="fileNameText" x="500" y="40" width="190" height="25" editable="false"/>
+	<s:Button id="openFileBtn" x="700" y="40" width="80" height="25" label="查看文件"
+			  click="lookFile(event)"/>
+	<s:TextArea id="dataText" x="500" y="72" width="280" height="145"/>
+	<s:TextArea id="valueText" x="500" y="270" width="280" height="310" editable="false"/>
+	<s:Button id="lookJsonBtn" x="660" y="225" width="120" height="25" label="查看JSON字符串"
+			  click="lookJsonStr(event)"/>
+	<s:Button id="lookXmlBtn" x="500" y="225" width="110" height="25" label="查看XML字符串"
+			  click="lookXmlStr(event)"/>
 </s:Module>
