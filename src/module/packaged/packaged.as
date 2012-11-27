@@ -5,8 +5,12 @@ import flash.events.MouseEvent;
 import flash.filesystem.File;
 import flash.filesystem.FileMode;
 import flash.filesystem.FileStream;
+import flash.utils.Dictionary;
+import flash.utils.getTimer;
 
 import lolo.utils.StringUtil;
+
+import module.packaged.EditVersion;
 
 import mx.collections.ArrayList;
 import mx.events.FlexEvent;
@@ -14,7 +18,10 @@ import mx.events.FlexEvent;
 
 /**项目列表*/
 private var _projectList:XML;
+/**项目配置*/
+private var _projectConfig:XML;
 
+private var _editVersion:EditVersion;
 
 
 /**
@@ -23,6 +30,11 @@ private var _projectList:XML;
  */
 protected function creationCompleteHandler(event:FlexEvent):void
 {
+	_editVersion = new EditVersion();
+	_editVersion.x = 50;
+	_editVersion.y = 50;
+	
+	
 	var stream:FileStream = new FileStream();
 	var file:File = new File("app:/assets/xml/ProjectList.xml");
 	stream.open(file, FileMode.READ);
@@ -34,11 +46,33 @@ protected function creationCompleteHandler(event:FlexEvent):void
 		al.addItem({ label:String(_projectList.project[i].@name) });
 	}
 	projectDDL.dataProvider = al;
+	projectDDL.selectedIndex = 0;
 	
 	
 	packagedPathIT.text = "E:/Framework/release";
-	sourcePathIT.text = "E:/Framework/source/Framework/src";
+	sourcePathIT.text = "E:/Framework/source/Framework";
+	resPathIT.text = "E:/Framework/res/";
+	resVersionIT.text = "zh_CN";
+	authorIT.text = "LOLO";
+	
+	init();
 }
+
+
+
+/**
+ * 初始化
+ */
+private function init():void
+{
+	var stream:FileStream = new FileStream();
+	var file:File = new File(sourcePathIT.text + "/.actionScriptProperties");
+	stream.open(file, FileMode.READ);
+	_projectConfig = new XML(stream.readUTFBytes(stream.bytesAvailable));
+	stream.close();
+}
+
+
 
 
 /**
@@ -107,5 +141,40 @@ private function resPath_SelectHandler(event:Event):void
 
 
 
-
+/**
+ * 点击打包按钮
+ * @param event
+ */
+protected function packagedBtn_clickHandler(event:MouseEvent):void
+{
+	var stream:FileStream = new FileStream();
+	var file:File = new File("app:/assets/xml/Language.xml");
+	stream.open(file, FileMode.READ);
+	var languageXML:XML = new XML(stream.readUTFBytes(stream.bytesAvailable));
+	stream.close();
+	
+	
+//	var t:int = getTimer();
+//	var language:Dictionary = new Dictionary();
+//	var i:int = 0;
+//	var len:int = languageXML.item.length();
+//	for(; i < len; i++) {
+//		var content:String = languageXML.item[i];
+//		content = content.replace(/\[br\]/g, "\n");
+//		language[String(languageXML.item[i].@id)] = content;
+//	}
+//	trace("解析耗时：", getTimer() - t, "ms");
+//	trace(language["010663"]);
+	
+	
+	
+	var t:int = getTimer();
+	var language:Dictionary = new Dictionary();
+	for each(var item:XML in languageXML..item)
+	{
+		language[String(item.@id)] = item.toString().replace(/\[br\]/g, "\n");
+	}
+	trace("解析耗时：", getTimer() - t, "ms");
+	trace(language["010663"]);
+}
 
