@@ -5,26 +5,32 @@
 		  xmlns:controls="controls.*"
 		  width="780" height="580" creationComplete="creationCompleteHandler(event)"
 		  fontFamily="微软雅黑" fontSize="12">
-	
 	<fx:Script source="compressImage.as"/>
 	
 	<fx:Declarations>
+		<s:RadioButtonGroup id="typeGroup" itemClick="typeGroup_itemClickHandler(event)"/>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<controls:GroupBox x="140" y="70" width="510" height="150" title="参数设置">
+	<controls:GroupBox x="140" y="55" width="510" height="190" title="参数设置">
 		<s:TextInput id="fileText" x="115" y="35" width="200" height="25" editable="false"/>
 		<s:Button id="fileBtn" x="325" y="35" width="70" height="25" label="单张图片"
 				  click="fileBtn_clickHandler(event)"/>
 		<s:Button id="folderBtn" x="405" y="35" width="70" height="25" label="文件夹"
 				  click="folderBtn_clickHandler(event)"/>
 		<s:Label x="40" y="42" fontSize="14" text="目标类型："/>
-		<s:Label x="40" y="97" fontSize="14" text="输出品质："/>
-		<s:HSlider id="qualityHS" x="115" y="98" change="qualityHS_changeHandler(event)" maximum="95"
+		<s:Label x="40" y="140" fontSize="14" text="输出品质："/>
+		<s:Label x="40" y="95" fontSize="14" text="输出类型："/>
+		<s:HSlider id="qualityHS" x="115" y="141" change="qualityHS_changeHandler(event)" maximum="95"
 				   minimum="50" value="80"/>
-		<s:TextInput id="qualityText" x="230" y="90" width="50" height="25" focusOut="qualityText_focusOutHandler(event)"
+		<s:TextInput id="qualityText" x="230" y="133" width="50" height="25" focusOut="qualityText_focusOutHandler(event)"
 					 change="qualityText_changeHandler(event)" maxChars="2" restrict="0-9" text="80"/>
+		<s:HGroup x="115" y="92" gap="20">
+			<s:RadioButton label="AUTO" groupName="typeGroup" value="auto" selected="true"/>
+			<s:RadioButton label="JPG" groupName="typeGroup" value="jpg"/>
+			<s:RadioButton label="PNG" groupName="typeGroup" value="png"/>
+		</s:HGroup>
 	</controls:GroupBox>
-	<controls:GroupBox x="140" y="255" width="510" height="250" title="压缩详情">
+	<controls:GroupBox x="140" y="290" width="510" height="250" title="压缩详情">
 		<mx:ProgressBar id="progressBar" x="120" y="33" width="270" height="25" label="压缩进度 0%"
 						fontWeight="normal" indeterminate="false" labelPlacement="center"
 						maximum="100" minimum="0" mode="manual"/>

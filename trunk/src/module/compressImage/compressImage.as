@@ -15,7 +15,9 @@ import flash.net.FileFilter;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
+import mx.controls.Alert;
 import mx.events.FlexEvent;
+import mx.events.ItemClickEvent;
 
 import spark.events.TextOperationEvent;
 
@@ -50,6 +52,16 @@ protected function creationCompleteHandler(event:FlexEvent):void
 }
 
 
+/**
+ * 导出类型有改变
+ * @param event
+ */
+protected function typeGroup_itemClickHandler(event:ItemClickEvent):void
+{
+	qualityHS.enabled = qualityText.editable = (typeGroup.selectedValue != "png");
+}
+
+
 
 /**
  * 点击选择文件
@@ -69,7 +81,7 @@ protected function fileBtn_clickHandler(event:MouseEvent):void
 protected function folderBtn_clickHandler(event:MouseEvent):void
 {
 	_fileType = 2;
-	_file.browseForDirectory("请选择包含要压缩图像文件的文件夹");
+	_file.browseForDirectory("请选择包含要压缩图像的文件夹");
 }
 
 
@@ -91,6 +103,7 @@ private function fileSelectHandler(event:Event):void
 			fs.writeBytes(_files[i].bytes);
 			fs.close();
 		}
+		Alert.show("储存完毕！");
 		return;
 	}
 	
@@ -162,16 +175,26 @@ private function imgLoader_completeHandler(event:Event):void
 {
 	TweenMax.killDelayedCallsTo(loadNextImage);
 	
-	var encodedImage:ByteArray;
 	var imageData:BitmapData = (_imgLoader.content as Bitmap).bitmapData;
-	if (_fileList[_index].extension.toLocaleLowerCase() == "png") {
-		encodedImage = PNGEncoder.encode(imageData);
+	var fileType:String;
+	
+	//自动匹配导出类型
+	if(typeGroup.selectedValue == "auto") {
+		fileType = _fileList[_index].extension.toLocaleLowerCase();
+	}
+	else if(typeGroup.selectedValue == "jpg") {//指定导出类型为jpg
+		fileType = "jpg";
 	}
 	else {
-		encodedImage = new JPGEncoder(qualityHS.value).encode(imageData);
+		fileType = "png";
 	}
+	
+	var encodedImage:ByteArray = (fileType == "png") ? PNGEncoder.encode(imageData) : new JPGEncoder(qualityHS.value).encode(imageData);
 	var file:File = _fileList[_index];
-	_files.push({name:file.name, bytes:encodedImage});
+	var arr:Array = file.name.split(".");
+	var fileName:String = "";
+	for(var i:int = 0; i < (arr.length - 1); i++) fileName += arr[i] + ".";
+	_files.push({name:fileName + fileType, bytes:encodedImage});
 	
 	var current:int = _index + 1;
 	progressBar.setProgress(current, _fileList.length);
