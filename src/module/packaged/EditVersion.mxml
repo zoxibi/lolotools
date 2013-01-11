@@ -5,11 +5,17 @@
 		 width="700" height="500" fontFamily="微软雅黑" fontSize="12" title="编辑版本号"
 		 creationComplete="panel1_creationCompleteHandler(event)"
 		 >
+	
+	
 	<fx:Script source="editVersion.as" />
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<s:TextArea x="10" y="10" width="680" height="410"/>
-	<s:Button x="610" y="430" width="80" height="30" label="保存并退出" color="#990000"/>
-	<s:Button x="532" y="434" width="60" height="24" label="取消"/>
+	
+	<s:TextArea id="contentText" x="10" y="10" width="680" height="410" fontSize="14" styleName="textArea1"/>
+	<s:Button id="defineBtn" x="630" y="428" width="60" height="30" label="确定"
+			  click="defineBtn_clickHandler(event)" color="#990000"/>
+	<s:Button id="reloadBtn" x="475" y="431" width="60" height="25" label="重读"
+			  click="reloadBtn_clickHandler(event)"/>
+	<s:Button id="cencelBtn" x="555" y="431" width="60" height="25" label="取消" click="cencelBtn_clickHandler(event)"/>
 </s:Panel>

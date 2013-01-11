@@ -16,7 +16,7 @@
 		</s:ModuleLoader>
 		<s:ModuleLoader id="dataView" url="module/dataView/DataView.swf" width="100%" height="100%" label="数据查看">
 		</s:ModuleLoader>
-		<s:ModuleLoader width="100%" height="100%" label="图片切割">
+		<s:ModuleLoader id="imageCutting" url="module/imageCutting/ImageCutting.swf" width="100%" height="100%" label="图片切割">
 		</s:ModuleLoader>
 		<s:ModuleLoader width="100%" height="100%" label="地图编辑">
 		</s:ModuleLoader>

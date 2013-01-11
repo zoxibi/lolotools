@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="700" height="500" title="编辑要导出的程序模块"
+		 fontFamily="微软雅黑" fontSize="12"
+		 creationComplete="panel1_creationCompleteHandler(event)"
+		 >
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script source="editModule.as" />
+	
+	<mx:Tree id="moduleTree" x="10" y="10" width="680" height="410"
+			 defaultLeafIcon="{P_ModuleAs_Sm_N}"
+			 folderClosedIcon="{P_RunnableAs_Sm_N}"
+			 folderOpenIcon="{P_RunnableAs_Sm_N}"
+			 itemRenderer="module.packaged.ExportItemRenderer"
+			 itemDoubleClick="moduleTree_itemDoubleClickHandler(event)"
+			 doubleClickEnabled="true"
+	/>
+	<s:Button id="defineBtn" x="630" y="428" width="60" height="30" label="确定" color="#990000" click="defineBtn_clickHandler(event)"/>
+	<s:CheckBox id="selectAllCB" x="10" y="435" label="全选 / 反选" selected="true" change="selectAllCB_changeHandler(event)" />
+	<s:Button id="reloadBtn" x="475" y="431" width="60" height="25" label="重读"
+			  click="reloadBtn_clickHandler(event)"/>
+	<s:Button id="cencelBtn" x="555" y="431" width="60" height="25" label="取消" click="cencelBtn_clickHandler(event)"/>
+</s:Panel>
