@@ -5,15 +5,16 @@ import flash.events.MouseEvent;
 import flash.filesystem.File;
 import flash.filesystem.FileMode;
 import flash.filesystem.FileStream;
-import flash.utils.Dictionary;
-import flash.utils.getTimer;
 
 import lolo.utils.StringUtil;
 
+import module.packaged.EditModule;
+import module.packaged.EditRes;
 import module.packaged.EditVersion;
 
 import mx.collections.ArrayList;
 import mx.events.FlexEvent;
+import mx.managers.PopUpManager;
 
 
 /**项目列表*/
@@ -21,7 +22,12 @@ private var _projectList:XML;
 /**项目配置*/
 private var _projectConfig:XML;
 
+/**编辑版本号模块*/
 private var _editVersion:EditVersion;
+/**编辑导出资源模块*/
+private var _editRes:EditRes;
+/**编辑要导出的程序模块*/
+private var _editModule:EditModule;
 
 
 /**
@@ -33,6 +39,14 @@ protected function creationCompleteHandler(event:FlexEvent):void
 	_editVersion = new EditVersion();
 	_editVersion.x = 50;
 	_editVersion.y = 50;
+	
+	_editModule = new EditModule();
+	_editModule.x = 50;
+	_editModule.y = 50;
+	
+	_editRes = new EditRes();
+	_editRes.x = 50;
+	_editRes.y = 50;
 	
 	
 	var stream:FileStream = new FileStream();
@@ -54,23 +68,10 @@ protected function creationCompleteHandler(event:FlexEvent):void
 	resPathIT.text = "E:/Framework/res/";
 	resVersionIT.text = "zh_CN";
 	authorIT.text = "LOLO";
-	
-	init();
+	winRarPathIT.text = "C:/Program Files/WinRAR/WinRAR.exe";
+	mxmlcPathIT.text = "D:/Program Files/Adobe/Adobe Flash Builder 4.6/sdks/4.6.0/bin/mxmlc.exe";
 }
 
-
-
-/**
- * 初始化
- */
-private function init():void
-{
-	var stream:FileStream = new FileStream();
-	var file:File = new File(sourcePathIT.text + "/.actionScriptProperties");
-	stream.open(file, FileMode.READ);
-	_projectConfig = new XML(stream.readUTFBytes(stream.bytesAvailable));
-	stream.close();
-}
 
 
 
@@ -79,7 +80,7 @@ private function init():void
  * 点击查看打包目录按钮
  * @param event
  */
-protected function packagedPathBtn_clickHandler(event:MouseEvent):void
+protected function packagedPathLookBtn_clickHandler(event:MouseEvent):void
 {
 	var nativeProcessStartupInfo:NativeProcessStartupInfo = new NativeProcessStartupInfo();
 	nativeProcessStartupInfo.executable = new File("c:/Windows/explorer.exe");
@@ -88,6 +89,24 @@ protected function packagedPathBtn_clickHandler(event:MouseEvent):void
 	nativeProcessStartupInfo.arguments = processArgs;
 	
 	new NativeProcess().start(nativeProcessStartupInfo);
+}
+
+
+
+/**
+ * 点击选择打包目录按钮
+ * @param event
+ */
+protected function packagedPathBtn_clickHandler(event:MouseEvent):void
+{
+	var directory:File = new File(packagedPathIT.text);
+	directory.addEventListener(Event.SELECT, packagedPath_SelectHandler);
+	directory.browseForDirectory("请选择打包目录");
+}
+
+private function packagedPath_SelectHandler(event:Event):void 
+{
+	packagedPathIT.text = StringUtil.getDirectory((event.target as File).url);
 }
 
 
@@ -140,6 +159,79 @@ private function resPath_SelectHandler(event:Event):void
 }
 
 
+/**
+ * 点击选择WinRAR.exe按钮
+ * @param event
+ */
+protected function winRarPathBtn_clickHandler(event:MouseEvent):void
+{
+	var directory:File = new File(winRarPathIT.text);
+	directory.addEventListener(Event.SELECT, winRarPath_SelectHandler);
+	directory.browseForOpen("请选择 WinRAR.exe");
+}
+
+private function winRarPath_SelectHandler(event:Event):void 
+{
+	winRarPathIT.text = StringUtil.getDirectory((event.target as File).url);
+}
+
+
+
+/**
+ * 点击选择mxmlc.exe按钮
+ * @param event
+ */
+protected function mxmlcPathBtn_clickHandler(event:MouseEvent):void
+{
+	var directory:File = new File(mxmlcPathIT.text);
+	directory.addEventListener(Event.SELECT, mxmlcPath_SelectHandler);
+	directory.browseForOpen("请选择 mxmlc.exe");
+}
+
+private function mxmlcPath_SelectHandler(event:Event):void 
+{
+	mxmlcPathIT.text = StringUtil.getDirectory((event.target as File).url);
+}
+
+
+
+
+
+
+
+/**
+ * 点击编辑程序模块按钮
+ * @param event
+ */
+protected function editModuleBtn_clickHandler(event:MouseEvent):void
+{
+	PopUpManager.addPopUp(_editModule, this, true);
+	_editModule.show(sourcePathIT.text + "/.actionScriptProperties");
+}
+
+
+/**
+ * 点击编辑导出资源按钮
+ * @param event
+ */
+protected function editResBtn_clickHandler(event:MouseEvent):void
+{
+	PopUpManager.addPopUp(_editRes, this, true);
+	_editRes.show(resPathIT.text + resVersionIT.text);
+}
+
+
+/**
+ * 点击编辑版本号按钮
+ * @param event
+ */
+protected function editVersionBtn_clickHandler(event:MouseEvent):void
+{
+	PopUpManager.addPopUp(_editVersion, this, true);
+	_editVersion.show(resPathIT.text + resVersionIT.text + "/xml/core/resConfig.xml");
+}
+
+
 
 /**
  * 点击打包按钮
@@ -147,34 +239,5 @@ private function resPath_SelectHandler(event:Event):void
  */
 protected function packagedBtn_clickHandler(event:MouseEvent):void
 {
-	var stream:FileStream = new FileStream();
-	var file:File = new File("app:/assets/xml/Language.xml");
-	stream.open(file, FileMode.READ);
-	var languageXML:XML = new XML(stream.readUTFBytes(stream.bytesAvailable));
-	stream.close();
 	
-	
-//	var t:int = getTimer();
-//	var language:Dictionary = new Dictionary();
-//	var i:int = 0;
-//	var len:int = languageXML.item.length();
-//	for(; i < len; i++) {
-//		var content:String = languageXML.item[i];
-//		content = content.replace(/\[br\]/g, "\n");
-//		language[String(languageXML.item[i].@id)] = content;
-//	}
-//	trace("解析耗时：", getTimer() - t, "ms");
-//	trace(language["010663"]);
-	
-	
-	
-	var t:int = getTimer();
-	var language:Dictionary = new Dictionary();
-	for each(var item:XML in languageXML..item)
-	{
-		language[String(item.@id)] = item.toString().replace(/\[br\]/g, "\n");
-	}
-	trace("解析耗时：", getTimer() - t, "ms");
-	trace(language["010663"]);
 }
-

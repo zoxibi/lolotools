@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  width="780" height="580" creationComplete="creationCompleteHandler(event)"
+		  fontFamily="微软雅黑" fontSize="12">
+	
+	
+	<fx:Script source="imageCutting.as"/>
+	<s:Button id="selectRootDirectoryBtn" x="533" y="112" width="60" height="25" label="选择"
+			  click="selectRootDirectoryBtn_clickHandler(event)"/>
+	<s:Label x="466" y="121" text="目标文件夹"/>
+	<s:RadioButton x="505" y="165" label="透明色"/>
+	<s:Label x="465" y="169" text="背景："/>
+	<s:RadioButton x="570" y="165" label="纯色" selected="true"/>
+	<s:TextInput x="617" y="163" width="70" height="25" text="0x000000"/>
+</s:Module>
