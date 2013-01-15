@@ -13,5 +13,9 @@
 	<s:RadioButton x="505" y="165" label="透明色"/>
 	<s:Label x="465" y="169" text="背景："/>
 	<s:RadioButton x="570" y="165" label="纯色" selected="true"/>
-	<s:TextInput x="617" y="163" width="70" height="25" text="0x000000"/>
+	<s:TextInput id="transparentColorText" x="617" y="163" width="80" height="25" text="0xFF000000"/>
+	<s:Label x="553" y="204" text="色彩偏移："/>
+	<s:TextInput id="offsetsText" x="617" y="196" width="80" height="25" restrict="0-9^^aAbBcCdDeEfFxX" text="0x00111111"/>
+	<s:Button id="saveBtn" x="617" y="112" width="60" height="25" label="保存"
+			  click="saveBtn_clickHandler(event)" enabled="false"/>
 </s:Module>
