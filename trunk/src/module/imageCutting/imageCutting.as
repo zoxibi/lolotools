@@ -1,6 +1,5 @@
 import com.adobe.images.PNGEncoder;
 
-import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Loader;
 import flash.events.Event;
@@ -9,13 +8,13 @@ import flash.filesystem.File;
 import flash.filesystem.FileMode;
 import flash.filesystem.FileStream;
 import flash.geom.Matrix;
-import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.net.URLRequest;
 
 import mx.controls.Alert;
-import mx.core.UIComponent;
 import mx.events.FlexEvent;
+
+import spark.events.TextOperationEvent;
 
 
 /**目标根文件夹*/
@@ -89,6 +88,38 @@ protected function selectRootDirectoryBtn_clickHandler(event:MouseEvent):void
 
 
 
+protected function redHS_changeHandler(event:Event):void
+{
+	redIT.text = redHS.value.toString();
+}
+
+protected function greenHS_changeHandler(event:Event):void
+{
+	greenIT.text = greenHS.value.toString();
+}
+
+protected function blueHS_changeHandler(event:Event):void
+{
+	blueIT.text = blueHS.value.toString();
+}
+
+protected function redIT_changeHandler(event:TextOperationEvent):void
+{
+	redHS.value = uint(redIT.text);
+}
+
+protected function greenIT_changeHandler(event:TextOperationEvent):void
+{
+	greenHS.value = uint(greenIT.text);
+}
+
+protected function blueIT_changeHandler(event:TextOperationEvent):void
+{
+	blueHS.value = uint(blueIT.text);
+}
+
+
+
 
 
 private var _imageList:Array;
@@ -137,10 +168,15 @@ private function image_completeHandler(event:Event):void
 	var x:int;
 	var y:int;
 	var bitmapData:BitmapData;
-	var color:uint;
-	var offsets:int = int(offsetsText.text);
-	var transparentColor:uint = uint(transparentColorText.text);
 	var rect:Rectangle;
+	var color:uint;
+	var red:uint;
+	var green:uint;
+	var blue:uint;
+	var needTransparent:Boolean;
+	var tRed:uint = uint(redIT.text);
+	var tGreen:uint = uint(greenIT.text);
+	var tBlue:uint = uint(blueIT.text);
 	
 	for(i = 0; i < _imageList.length; i++)
 	{
@@ -151,9 +187,17 @@ private function image_completeHandler(event:Event):void
 		for(x = 0; x < bitmapData.width; x++) {
 			for(y = 0; y < bitmapData.height; y++) {
 				color = bitmapData.getPixel32(x, y);
-				if((color <= transparentColor + offsets) && (color >= transparentColor - offsets)) {
-					bitmapData.setPixel32(x, y, 0);
-				}
+				red = color >>> 16 & 0xFF;
+				green = color >>> 8 & 0xFF;
+				blue = color & 0xFF;
+				
+				if(colorGroup.selectedValue == "red")
+					needTransparent = (red > tRed) && (green < tGreen) && (blue < tBlue);
+				else if(colorGroup.selectedValue == "green")
+					needTransparent = (red < tRed) && (green > tGreen) && (blue < tBlue);
+				else
+					needTransparent = (red < tRed) && (green < tGreen) && (blue > tBlue);
+				if(needTransparent) bitmapData.setPixel32(x, y, 0);
 			}
 		}
 		

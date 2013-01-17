@@ -7,15 +7,31 @@
 	
 	
 	<fx:Script source="imageCutting.as"/>
+	<fx:Declarations>
+		<s:RadioButtonGroup id="colorGroup"/>
+	</fx:Declarations>
 	<s:Button id="selectRootDirectoryBtn" x="533" y="112" width="60" height="25" label="选择"
 			  click="selectRootDirectoryBtn_clickHandler(event)"/>
 	<s:Label x="466" y="121" text="目标文件夹"/>
-	<s:RadioButton x="505" y="165" label="透明色"/>
-	<s:Label x="465" y="169" text="背景："/>
-	<s:RadioButton x="570" y="165" label="纯色" selected="true"/>
-	<s:TextInput id="transparentColorText" x="617" y="163" width="80" height="25" text="0xFF000000"/>
-	<s:Label x="553" y="204" text="色彩偏移："/>
-	<s:TextInput id="offsetsText" x="617" y="196" width="80" height="25" restrict="0-9^^aAbBcCdDeEfFxX" text="0x00111111"/>
+	<s:RadioButton x="506" y="165" label="透明色"/>
+	<s:Label x="466" y="169" text="背景："/>
 	<s:Button id="saveBtn" x="617" y="112" width="60" height="25" label="保存"
 			  click="saveBtn_clickHandler(event)" enabled="false"/>
+	<s:HSlider id="redHS" x="605" y="170" width="40" change="redHS_changeHandler(event)"
+			   maximum="255" minimum="0" stepSize="5" value="50"/>
+	<s:HSlider id="greenHS" x="605" y="202" width="40" change="greenHS_changeHandler(event)"
+			   maximum="255" minimum="0" stepSize="5" value="200"/>
+	<s:HSlider id="blueHS" x="605" y="234" width="40" change="blueHS_changeHandler(event)"
+			   maximum="255" minimum="0" stepSize="5" value="50"/>
+	<s:TextInput id="redIT" x="651" y="162" width="40" height="25"
+				 change="redIT_changeHandler(event)" restrict="0-9" text="150"/>
+	<s:TextInput id="greenIT" x="651" y="194" width="40" height="25"
+				 change="greenIT_changeHandler(event)" restrict="0-9" text="180"/>
+	<s:TextInput id="blueIT" x="651" y="226" width="40" height="25"
+				 change="blueIT_changeHandler(event)" restrict="0-9" text="180"/>
+	<s:VGroup x="573" y="165" gap="13">
+		<s:RadioButton label="R" value="red" groupName="colorGroup"/>
+		<s:RadioButton label="G" groupName="colorGroup" selected="true" value="green"/>
+		<s:RadioButton label="B" value="blue" groupName="colorGroup"/>
+	</s:VGroup>
 </s:Module>
