@@ -1,37 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		  xmlns:s="library://ns.adobe.com/flex/spark" 
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:controls="controls.*"
 		  width="780" height="580" creationComplete="creationCompleteHandler(event)"
 		  fontFamily="微软雅黑" fontSize="12">
-	
 	
 	<fx:Script source="imageCutting.as"/>
 	<fx:Declarations>
 		<s:RadioButtonGroup id="colorGroup"/>
 	</fx:Declarations>
-	<s:Button id="selectRootDirectoryBtn" x="533" y="112" width="60" height="25" label="选择"
-			  click="selectRootDirectoryBtn_clickHandler(event)"/>
-	<s:Label x="466" y="121" text="目标文件夹"/>
-	<s:RadioButton x="506" y="165" label="透明色"/>
-	<s:Label x="466" y="169" text="背景："/>
-	<s:Button id="saveBtn" x="617" y="112" width="60" height="25" label="保存"
-			  click="saveBtn_clickHandler(event)" enabled="false"/>
-	<s:HSlider id="redHS" x="605" y="170" width="40" change="redHS_changeHandler(event)"
-			   maximum="255" minimum="0" stepSize="5" value="50"/>
-	<s:HSlider id="greenHS" x="605" y="202" width="40" change="greenHS_changeHandler(event)"
-			   maximum="255" minimum="0" stepSize="5" value="200"/>
-	<s:HSlider id="blueHS" x="605" y="234" width="40" change="blueHS_changeHandler(event)"
-			   maximum="255" minimum="0" stepSize="5" value="50"/>
-	<s:TextInput id="redIT" x="651" y="162" width="40" height="25"
-				 change="redIT_changeHandler(event)" restrict="0-9" text="150"/>
-	<s:TextInput id="greenIT" x="651" y="194" width="40" height="25"
-				 change="greenIT_changeHandler(event)" restrict="0-9" text="180"/>
-	<s:TextInput id="blueIT" x="651" y="226" width="40" height="25"
-				 change="blueIT_changeHandler(event)" restrict="0-9" text="180"/>
-	<s:VGroup x="573" y="165" gap="13">
-		<s:RadioButton label="R" value="red" groupName="colorGroup"/>
-		<s:RadioButton label="G" groupName="colorGroup" selected="true" value="green"/>
-		<s:RadioButton label="B" value="blue" groupName="colorGroup"/>
-	</s:VGroup>
+	<s:TextInput id="fpsText" x="375" y="495" width="65" height="25"
+				 change="fpsText_changeHandler(event)" maxChars="2" restrict="0-9" text="25"/>
+	<s:Label x="308" y="503" text="帧频(FPS)："/>
+	<s:TextInput id="cpxText" x="375" y="455" width="30" height="25"
+				 change="cpInputText_changeHandler(event)" text="200" restrict="0-9" focusOut="stage_mouseMoveHandler()"/>
+	<s:TextInput id="cpyText" x="410" y="455" width="30" height="25"
+				 change="cpInputText_changeHandler(event)" text="300"  restrict="0-9" focusOut="stage_mouseMoveHandler()"/>
+	<s:Label x="300" y="463" text="注册点位置："/>
+	
+	<controls:GroupBox x="465" y="40" width="300" height="180" title="生成动画包">
+		<s:Button id="selectRootDirectoryBtn" x="95" y="20" width="50" height="25" label="选择"
+				  click="selectRootDirectoryBtn_clickHandler(event)"/>
+		<s:Label x="20" y="27" fontSize="12" text="目标文件夹："/>
+		<s:Label x="20" y="77" text="背景色："/>
+		<s:Button id="saveBtn" x="230" y="20" width="50" height="25" label="保存"
+				  click="saveBtn_clickHandler(event)"/>
+		<s:HSlider id="redHS" x="189" y="78" width="45" change="redHS_changeHandler(event)"
+				   maximum="255" minimum="0" stepSize="5" value="50"/>
+		<s:HSlider id="greenHS" x="189" y="110" width="45" change="greenHS_changeHandler(event)"
+				   maximum="255" minimum="0" stepSize="5" value="200"/>
+		<s:HSlider id="blueHS" x="189" y="142" width="45" change="blueHS_changeHandler(event)"
+				   maximum="255" minimum="0" stepSize="5" value="50"/>
+		<s:TextInput id="redIT" x="240" y="70" width="40" height="25"
+					 change="redIT_changeHandler(event)" restrict="0-9" text="150"/>
+		<s:TextInput id="greenIT" x="240" y="102" width="40" height="25"
+					 change="greenIT_changeHandler(event)" restrict="0-9" text="180"/>
+		<s:TextInput id="blueIT" x="240" y="134" width="40" height="25"
+					 change="blueIT_changeHandler(event)" restrict="0-9" text="180"/>
+		<s:Group id="bgGroup" x="69" y="71" width="115" height="85">
+			<s:RadioButton x="3" y="3" label="透明" groupName="bgGroup" selected="true"/>
+			<s:RadioButton x="60" y="3" label="Red" groupName="bgGroup" value="red"/>
+			<s:RadioButton x="60" y="33" label="Green" groupName="bgGroup" value="green"/>
+			<s:RadioButton x="59" y="64" label="Blue" groupName="bgGroup" value="blue"/>
+		</s:Group>
+		<mx:ProgressBar id="readPB" x="150" y="20" width="75" height="12" label=" "
+						labelPlacement="center" mode="manual"/>
+		<mx:ProgressBar id="savePB" x="150" y="33" width="75" height="12" label=" "
+						labelPlacement="center" mode="manual"/>
+	</controls:GroupBox>
+	
+	<controls:GroupBox x="465" y="248" width="300" height="55" title="解压动画包">
+	</controls:GroupBox>
+	
+	<controls:GroupBox x="465" y="335" width="300" height="180" title="导出传统MC">
+		<s:Label x="15" y="27" text="SWF位置："/>
+		<s:TextInput id="swfFileUrlText" x="77" y="20" width="150" height="25" editable="false"/>
+		<s:TextInput id="swfMcText" x="77" y="60" width="150" height="25" editable="false"/>
+		<s:Button id="selectSwfBtn" x="235" y="20" width="50" height="25" label="选择"
+				  click="selectSwfBtn_clickHandler(event)"/>
+		<s:Button id="mcPreviewBtn" x="235" y="60" width="50" height="25" label="预览"
+				  click="mcPreviewBtn_clickHandler(event)" enabled="false"/>
+		<s:Button id="saveMcPngBtn" x="235" y="137" width="50" height="25" label="保存"
+				  click="saveMcPngBtn_clickHandler(event)" enabled="false"/>
+		<s:Button id="createMcPngBtn" x="175" y="137" width="50" height="25" label="生成"
+				  click="createMcPngBtn_clickHandler(event)" enabled="false"/>
+		<s:Label x="20" y="67" text="MC定义："/>
+		<mx:ProgressBar id="createMcPngPB" x="15" y="137" width="150" height="25"
+						labelPlacement="center" maximum="1" minimum="0" mode="manual" label=" "/>
+		<s:CheckBox id="swfMcRectCB" x="15" y="102" label="指定图像宽高"
+					click="swfMcRectCB_clickHandler(event)"/>
+		<s:Label x="125" y="107" text="宽："/>
+		<s:TextInput id="swfMcWidthText" x="150" y="100" width="50" height="25" enabled="false"
+					 text="1000"/>
+		<s:TextInput id="swfMcHeightText" x="235" y="100" width="50" height="25" enabled="false"
+					 text="600"/>
+		<s:Label x="210" y="107" text="高："/>
+	</controls:GroupBox>
+	<s:Label x="40" y="463" text="动画列表："/>
+	<s:DropDownList id="movieDDL" x="100" y="455" width="160" height="25"
+					change="movieDDL_changeHandler(event)"></s:DropDownList>
+	<s:Button id="prevFrameBtn" x="100" y="500" width="40" height="25" label="&lt;&lt;"
+			  click="frameControlBtn_clickHandler(event)"/>
+	<s:Button id="playBtn" x="150" y="510" width="40" height="25" label="&gt;"
+			  click="playBtn_clickHandler(event)" fontSize="14" fontWeight="normal"
+			  textDecoration="none"/>
+	<s:Button id="nextFrameBtn" x="200" y="500" width="40" height="25" label="&gt;&gt;"
+			  click="frameControlBtn_clickHandler(event)"/>
+	<s:Label x="75" y="508" text="帧："/>
+	<s:Label id="frameText" x="140" y="490" width="60" fontWeight="normal" text="100/100"
+			 textAlign="center" verticalAlign="top"/>
+	
 </s:Module>

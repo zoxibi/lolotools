@@ -14,7 +14,7 @@ package lolo.core
 	/**
 	 * 位图影片剪辑
 	 * 
-	 * 关于BitmapMovieClipEvent.ENTER_FRAME事件，与，与flash.display.MovieClip的Event.ENTER_FRAME事件不同的是：
+	 * 关于BitmapMovieClipEvent.ENTER_FRAME事件，与flash.display.MovieClip的Event.ENTER_FRAME事件不同的是：
 	 * 只会在帧刷新的时候触发该事件，而不是按照帧频不断触发
 	 * 
 	 * @author LOLO
@@ -448,6 +448,15 @@ package lolo.core
 			_timer.clear();
 			_timer = null;
 		}
+		
+		
+		
+		/**
+		 * 帧序列动画列表。注意：该属性仅供测试使用，切勿在实际项目中使用
+		 * @param value
+		 */
+		public function set frameList(value:Vector.<BitmapMovieClipData>):void { _frameList = value; }
+		public function get frameList():Vector.<BitmapMovieClipData> { return _frameList; }
 		//
 	}
 }

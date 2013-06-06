@@ -24,12 +24,13 @@
     <module application="src/LoloTools.mxml" destPath="module/dataView/DataView.swf" optimize="true" sourcePath="src/module/dataView/DataView.mxml"/>
     <module application="src/LoloTools.mxml" destPath="module/network/Network.swf" optimize="true" sourcePath="src/module/network/Network.mxml"/>
     <module application="src/LoloTools.mxml" destPath="module/imageCutting/ImageCutting.swf" optimize="true" sourcePath="src/module/imageCutting/ImageCutting.mxml"/>
+    <module application="src/LoloTools.mxml" destPath="module/mapEdit/MapEdit.swf" optimize="true" sourcePath="src/module/mapEdit/MapEdit.mxml"/>
   </modules>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default">
-      <airSettings airCertificatePath="C:/Users/luozc/Desktop/新建文件夹/IOS证书/loloAir.p12" airTimestamp="true" anePathSet="true" version="1">
+      <airSettings airCertificatePath="C:/Users/luozc/Desktop/demo/ios_test/lolo.p12" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths/>
       </airSettings>

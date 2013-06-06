@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  width="780" height="580" creationComplete="creationCompleteHandler(event)"
+		  fontFamily="微软雅黑" fontSize="12">
+	
+	<fx:Declarations>
+		<fx:Array id="tools">
+			<fx:Object label="arrow" />
+			<fx:Object label="head" />
+		</fx:Array>
+	</fx:Declarations>
+	<fx:Script source="mapEdit.as" />
+	<s:Label x="0" y="8" text="区块："/>
+	<s:TextInput id="tWidthText" x="35" y="0" width="30" height="25" text="80" restrict="0-9" maxChars="3"/>
+	<s:TextInput id="tHeightText" x="70" y="0" width="30" height="25" text="40" restrict="0-9" maxChars="3"/>
+	<s:CheckBox id="tileCB" x="462" y="4" label="区块" mouseFocusEnabled="false" selected="true" change="tileCB_changeHandler(event)"/>
+	<s:CheckBox id="pointCB" x="517" y="4" label="坐标" mouseFocusEnabled="false" change="pointCB_changeHandler(event)"/>
+	<s:ButtonBar id="viewBB" x="700" y="0" width="80" height="25"
+				 change="viewBB_changeHandler(event)" iconField="icon" labelField=""
+				 mouseFocusEnabled="false" requireSelection="true" selectedIndex="0">
+		<s:dataProvider>
+			<s:ArrayList>
+				<fx:Object icon="{Arrow}" value="arrow" />
+				<fx:Object icon="{Hand}" value="hand" />
+				<fx:Object icon="{Layer}" value="arrow" />
+			</s:ArrayList>
+		</s:dataProvider>
+	</s:ButtonBar>
+	<s:Button id="saveBtn" x="355" y="0" width="50" height="25" label="保存"
+			  click="saveBtn_clickHandler(event)" mouseFocusEnabled="false" color="#990000"/>
+	<s:CheckBox id="passCB" x="650" y="4" label="障碍" mouseFocusEnabled="false"/>
+	<s:CheckBox id="waterCB" x="600" y="4" label="水域" mouseFocusEnabled="false"/>
+	<s:Panel id="layerPanel" x="0" y="140" width="200" height="350" title="图层">
+		<s:controlBarContent>
+			<s:Button id="addBtn" x="30" y="7" width="45" height="20" label="add"
+					  click="addBtn_clickHandler(event)" mouseFocusEnabled="false" />
+			<s:Button id="delBtn" x="30" y="7" width="45" height="20" label="del"
+					  click="delBtn_clickHandler(event)" mouseFocusEnabled="false"/>
+			<s:Button id="upBtn" x="30" y="7" width="29" height="20" label="↑"
+					  click="upOrDownBtn_clickHandler(event)" mouseFocusEnabled="false"/>
+			<s:Button id="downBtn" x="30" y="7" width="29" height="20" label="↓"
+					  click="upOrDownBtn_clickHandler(event)" mouseFocusEnabled="false"/>
+		</s:controlBarContent>
+		<mx:Accordion id="layerA" x="5" y="5" width="190" height="270" mouseFocusEnabled="false" >
+			<s:NavigatorContent width="100%" height="100%" label="遮挡物">
+				<s:List id="coverList" width="100%" height="100%" borderVisible="false" x="0" y="0" dataProvider="{_coverLayerData}"></s:List>
+			</s:NavigatorContent>
+			<s:NavigatorContent width="100%" height="100%" label="背景">
+				<s:List id="bgList" width="100%" height="100%" borderVisible="false" x="0" y="0" dataProvider="{_bgLayerData}"></s:List>
+			</s:NavigatorContent>
+		</mx:Accordion>
+		<s:Button id="closeLayerBtn" x="163" y="-26" width="30" height="18" label="x"
+				  click="openOrCloseLayerBtn_clickHandler(event)" mouseFocusEnabled="false"/>
+	</s:Panel>
+	<s:Button id="createTileBtn" x="105" y="0" width="50" height="25" label="生成"
+			  click="createTileBtn_clickHandler(event)" mouseFocusEnabled="false"/>
+	<s:Button id="layerBtn" x="200" y="0" width="50" height="25" label="图层"
+			  click="openOrCloseLayerBtn_clickHandler(event)" mouseFocusEnabled="false"/>
+	<s:Button id="loadBtn" x="295" y="0" width="50" height="25" label="载入"
+			  click="loadBtn_clickHandler(event)" color="#006600" mouseFocusEnabled="false"/>
+</s:Module>

@@ -12,13 +12,13 @@
 		<s:ModuleLoader id="packaged" url="module/packaged/Packaged.swf" width="100%" height="100%" label="程序打包" />
 		<s:ModuleLoader width="100%" height="100%" label="界面生成">
 		</s:ModuleLoader>
-		<s:ModuleLoader id="compressImage" url="module/compressImage/CompressImage.swf" width="100%" height="100%" label="压缩图片">
-		</s:ModuleLoader>
 		<s:ModuleLoader id="dataView" url="module/dataView/DataView.swf" width="100%" height="100%" label="数据查看">
 		</s:ModuleLoader>
-		<s:ModuleLoader id="imageCutting" url="module/imageCutting/ImageCutting.swf" width="100%" height="100%" label="图片切割">
+		<s:ModuleLoader id="compressImage" url="module/compressImage/CompressImage.swf" width="100%" height="100%" label="压缩图片">
 		</s:ModuleLoader>
-		<s:ModuleLoader width="100%" height="100%" label="地图编辑">
+		<s:ModuleLoader id="imageCutting" url="module/imageCutting/ImageCutting.swf" width="100%" height="100%" label="位图动画">
+		</s:ModuleLoader>
+		<s:ModuleLoader id="mapEdit" url="module/mapEdit/MapEdit.swf" width="100%" height="100%" label="地图编辑">
 		</s:ModuleLoader>
 		<s:ModuleLoader id="network" url="module/network/Network.swf" width="100%" height="100%" label="网络工具">
 		</s:ModuleLoader>
