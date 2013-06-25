@@ -56,7 +56,7 @@ private var _bgLayerData:ArrayCollection = new ArrayCollection();
 
 private const CONTAINER_WIDTH:uint = 780;
 private const CONTAINER_HEIGHT:uint = 540;
-private const CHUNK_WIDTH:uint = 200;
+private const CHUNK_WIDTH:uint = 300;
 private const CHUNK_HEIGHT:uint = 200;
 private const THUMBNAILS_RECT:Rectangle = new Rectangle(0, 0, 600, 400);
 
@@ -332,7 +332,7 @@ private function saveFile_selectHandler(event:Event):void
 	var mapInfo:Object = {
 		mapWidth:_bgC.width, mapHeight:_bgC.height,
 		tileWidth:tWidth, tileHeight:tHeight,
-		chunkWidth:CHUNK_WIDTH, chunkHeight:CHUNK_WIDTH,
+		chunkWidth:CHUNK_WIDTH, chunkHeight:CHUNK_HEIGHT,
 		hTileCount:h, vTileCount:v,
 		data:arr
 	}
@@ -360,6 +360,9 @@ private function saveFile_selectHandler(event:Event):void
 		}
 	}
 	
+	mapInfo.hChunkCount = h;
+	mapInfo.vChunkCount = v;
+	
 	
 	//保存缩略图
 	var scale:Number = Math.min(THUMBNAILS_RECT.width / _bgC.width, THUMBNAILS_RECT.height / _bgC.height);
@@ -375,7 +378,6 @@ private function saveFile_selectHandler(event:Event):void
 	fs.writeBytes(jpg.encode(bitmapData));
 	fs.close();
 	
-	scale = Math.min(THUMBNAILS_RECT.width / _bgC.width, THUMBNAILS_RECT.height / _bgC.height);
 	mapInfo.thumbnailsScale = scale;
 	
 	
