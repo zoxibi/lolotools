@@ -7,17 +7,21 @@
 		  fontFamily="微软雅黑" fontSize="12">
 	
 	<fx:Script source="imageCutting.as"/>
+	<fx:Script source="createBMC.as" />
+	<fx:Script source="exportMC.as" />
 	<fx:Declarations>
 		<s:RadioButtonGroup id="colorGroup"/>
 	</fx:Declarations>
-	<s:TextInput id="fpsText" x="375" y="495" width="65" height="25"
+	<s:TextInput id="fpsText" x="375" y="495" width="30" height="25"
 				 change="fpsText_changeHandler(event)" maxChars="2" restrict="0-9" text="25"/>
 	<s:Label x="308" y="503" text="帧频(FPS)："/>
 	<s:TextInput id="cpxText" x="375" y="455" width="30" height="25"
 				 change="cpInputText_changeHandler(event)" text="200" restrict="0-9" focusOut="stage_mouseMoveHandler()"/>
 	<s:TextInput id="cpyText" x="410" y="455" width="30" height="25"
-				 change="cpInputText_changeHandler(event)" text="300"  restrict="0-9" focusOut="stage_mouseMoveHandler()"/>
+				 change="cpInputText_changeHandler(event)" text="230"  restrict="0-9" focusOut="stage_mouseMoveHandler()"/>
 	<s:Label x="300" y="463" text="注册点位置："/>
+	<s:Button id="fpsToAllBtn" x="410" y="495" width="30" height="25" label="A"
+			  click="fpsToAllBtn_clickHandler(event)" toolTip="将帧频应用到全部动画"/>
 	
 	<controls:GroupBox x="465" y="40" width="300" height="180" title="生成动画包">
 		<s:Button id="selectRootDirectoryBtn" x="95" y="20" width="50" height="25" label="选择"
@@ -55,25 +59,25 @@
 	
 	<controls:GroupBox x="465" y="335" width="300" height="180" title="导出传统MC">
 		<s:Label x="15" y="27" text="SWF位置："/>
-		<s:TextInput id="swfFileUrlText" x="77" y="20" width="150" height="25" editable="false"/>
-		<s:TextInput id="swfMcText" x="77" y="60" width="150" height="25" editable="false"/>
-		<s:Button id="selectSwfBtn" x="235" y="20" width="50" height="25" label="选择"
-				  click="selectSwfBtn_clickHandler(event)"/>
-		<s:Button id="mcPreviewBtn" x="235" y="60" width="50" height="25" label="预览"
-				  click="mcPreviewBtn_clickHandler(event)" enabled="false"/>
-		<s:Button id="saveMcPngBtn" x="235" y="137" width="50" height="25" label="保存"
-				  click="saveMcPngBtn_clickHandler(event)" enabled="false"/>
-		<s:Button id="createMcPngBtn" x="175" y="137" width="50" height="25" label="生成"
-				  click="createMcPngBtn_clickHandler(event)" enabled="false"/>
+		<s:TextInput id="emcSwfUrlText" x="77" y="20" width="150" height="25" editable="false"/>
+		<s:TextInput id="emcMcDefText" x="77" y="60" width="150" height="25" editable="false"/>
+		<s:Button id="emcSelectSwfBtn" x="235" y="20" width="50" height="25" label="选择"
+				  click="emcSelectSwfBtn_clickHandler(event)"/>
+		<s:Button id="emcPreviewBtn" x="235" y="60" width="50" height="25" label="预览"
+				  click="emcPreviewBtn_clickHandler(event)" enabled="false"/>
+		<s:Button id="emcSaveBtn" x="235" y="137" width="50" height="25" label="保存"
+				  click="emcSaveBtn_clickHandler(event)" enabled="false"/>
+		<s:Button id="emcBtn" x="175" y="137" width="50" height="25" label="生成"
+				  click="emcBtn_clickHandler(event)" enabled="false"/>
 		<s:Label x="20" y="67" text="MC定义："/>
-		<mx:ProgressBar id="createMcPngPB" x="15" y="137" width="150" height="25"
+		<mx:ProgressBar id="emcPB" x="15" y="137" width="150" height="25"
 						labelPlacement="center" maximum="1" minimum="0" mode="manual" label=" "/>
-		<s:CheckBox id="swfMcRectCB" x="15" y="102" label="指定图像宽高"
-					click="swfMcRectCB_clickHandler(event)"/>
+		<s:CheckBox id="emcMcRectCB" x="15" y="102" label="指定图像宽高"
+					click="emcMcRectCB_clickHandler(event)"/>
 		<s:Label x="125" y="107" text="宽："/>
-		<s:TextInput id="swfMcWidthText" x="150" y="100" width="50" height="25" enabled="false"
+		<s:TextInput id="emcWidthText" x="150" y="100" width="50" height="25" enabled="false"
 					 text="1000"/>
-		<s:TextInput id="swfMcHeightText" x="235" y="100" width="50" height="25" enabled="false"
+		<s:TextInput id="emcHeightText" x="235" y="100" width="50" height="25" enabled="false"
 					 text="600"/>
 		<s:Label x="210" y="107" text="高："/>
 	</controls:GroupBox>

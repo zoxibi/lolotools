@@ -22,7 +22,7 @@
 		</s:ModuleLoader>
 		<s:ModuleLoader id="network" url="module/network/Network.swf" width="100%" height="100%" label="网络工具">
 		</s:ModuleLoader>
-		<s:ModuleLoader width="100%" height="100%" label="关于">
+		<s:ModuleLoader id="about" url="module/about/About.swf" width="100%" height="100%" label="关于">
 		</s:ModuleLoader>
 	</mx:ViewStack>
 	<mx:HRule x="0" y="44" width="800" strokeColor="#000000"/>
